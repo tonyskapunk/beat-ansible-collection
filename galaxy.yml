@@ -1,0 +1,19 @@
+---
+namespace: tonyskapunk
+name: beat
+version: 1.0.0
+readme: README.md
+authors:
+  - Tony Garcia
+description: Role and module to print internet time in beats
+license:
+  - GPL-3.0-or-later
+license_file: 'LICENSE'
+tags:
+  - beat
+  - internettime
+  - time
+repository: http://github.com/tonyskapunk/beat-ansible-collection
+documentation: http://github.com/tonyskapunk/beat-ansible-collection
+homepage: http://github.com/tonyskapunk/beat-ansible-collection
+issues: http://github.com/tonyskapunk/beat-ansible-collection/issues

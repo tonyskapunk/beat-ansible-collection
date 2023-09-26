@@ -1,0 +1,9 @@
+---
+- name: Get beat time
+  tonyskapunk.beat.beat:
+    centibeats: true
+  register: beat_time
+
+- name: Print beat time
+  debug:
+    msg: "The beat time is {{ beat_time.beat_time }}"

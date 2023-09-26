@@ -1,0 +1,42 @@
+---
+name: Module testing
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+  schedule:
+    - cron: '0 9 * * *'
+env:
+  NAMESPACE: tonyskapunk
+  COLLECTION_NAME: beat
+
+jobs:
+  sanity:
+    name: Sanity ${{ matrix.ansible }}
+    strategy:
+      matrix:
+        ansible:
+          - stable-2.9
+          - stable-2.15
+          - devel
+    runs-on: ubuntu-22.04
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          path: ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+
+      - name: Run sanity tests
+        run: ansible-test sanity -v --docker --color --coverage
+        working-directory: ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}

@@ -6,4 +6,4 @@
 
 - name: Print beat time
   debug:
-    msg: "The beat time is {{ beat_time.beat_time }}"
+    msg: "The beat time is {{ beat_time.beats }}"

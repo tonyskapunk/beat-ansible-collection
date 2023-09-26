@@ -51,9 +51,7 @@ from ansible.module_utils.basic import AnsibleModule
 from datetime import datetime
 
 
-def internettime(
-    hours: int, minutes: int, seconds: int, tzone: int, centibeats=False
-) -> str:
+def internettime(hours, minutes, seconds, tzone, centibeats=False):
     """Returns time(Swatch Internet Time) in beats."""
     itime = ((seconds + (minutes * 60) + ((hours + tzone + 1) * 3600)) / 86.4) % 1000
     beats = int(itime)
@@ -63,7 +61,7 @@ def internettime(
     return "@{0}".format(beats)
 
 
-def now(use_centibeats: bool = False) -> str:
+def now(use_centibeats=False):
     """Gets the current time in beats."""
     utc_now = datetime.utcnow()
     beats = internettime(

@@ -8,7 +8,6 @@ authors:
 description: Role and module to print internet time in beats
 license:
   - GPL-3.0-or-later
-license_file: 'LICENSE'
 tags:
   - beat
   - internettime

@@ -17,3 +17,5 @@ repository: http://github.com/tonyskapunk/beat-ansible-collection
 documentation: http://github.com/tonyskapunk/beat-ansible-collection
 homepage: http://github.com/tonyskapunk/beat-ansible-collection
 issues: http://github.com/tonyskapunk/beat-ansible-collection/issues
+build_ignore:
+  - .github*

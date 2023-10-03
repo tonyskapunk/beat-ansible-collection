@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+
+platforms:
+  - name: centos9
+    image: quay.io/centos/centos:stream9
+
+scenario:
+  name: test-role
+  test_sequence:
+    - dependency
+    # - cleanup
+    - destroy
+    - syntax
+    - create
+    # - prepare
+    - converge
+    # - idempotence
+    # - side_effect
+    # - verify
+    # - cleanup
+    - destroy

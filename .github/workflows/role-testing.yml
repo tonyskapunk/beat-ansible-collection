@@ -1,0 +1,40 @@
+---
+name: Role testing
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+  schedule:
+    - cron: '0 9 * * *'
+
+env:
+  NAMESPACE: tonyskapunk
+  COLLECTION_NAME: beat
+
+jobs:
+  molecule:
+    name: Molecule
+    strategy:
+      matrix:
+        ansible:
+          - stable-2.15
+          - devel
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: "${{ github.repository }}"
+
+      - name: Molecule
+        uses: gofrolist/molecule-action@v2
+        with:
+          molecule_options: --debug
+          molecule_command: test
+          molecule_args: --all -driver-name podman
+          molecule_working_dir: roles
+        env:
+          ANSIBLE_FORCE_COLOR: '1'

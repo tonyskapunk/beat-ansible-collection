@@ -29,7 +29,7 @@ jobs:
         with:
           molecule_options: --debug
           molecule_command: test
-          molecule_args: --all -driver-name podman
+          molecule_args: --all --driver-name podman
           molecule_working_dir: roles
         env:
           ANSIBLE_FORCE_COLOR: '1'

@@ -16,11 +16,6 @@ env:
 jobs:
   molecule:
     name: Molecule
-    strategy:
-      matrix:
-        ansible:
-          - stable-2.15
-          - devel
     runs-on: ubuntu-latest
     steps:
 

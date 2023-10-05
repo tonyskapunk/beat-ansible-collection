@@ -1,0 +1,48 @@
+---
+name: Role testing
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+  schedule:
+    - cron: '0 9 * * *'
+
+env:
+  NAMESPACE: tonyskapunk
+  COLLECTION_NAME: beat
+
+jobs:
+  molecule:
+    name: Molecule ${{ matrix.molecule }}
+    strategy:
+      matrix:
+        molecule:
+          - v6.0.2
+          - v5.1.0
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+
+      - name: Install molecule (${{ matrix.molecule }})
+        run: pip install https://github.com/ansible/molecule/archive/${{ matrix.molecule }}.tar.gz --disable-pip-version-check
+
+      - name: Install requirements
+        run: >
+          ansible-galaxy install -r 
+          ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}/roles/beat_role/molecule/*/requirements.yml
+
+      - name: Run molecule tests
+        run: >
+          molecule test --all
+        working-directory: ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}/roles/beat_role

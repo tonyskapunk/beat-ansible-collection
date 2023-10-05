@@ -1,0 +1,42 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: Create a container
+      containers.podman.podman_container:
+        name: "{{ item.name }}"
+        image: "{{ item.image }}"
+        state: started
+        command: sleep 1h
+        log_driver: json-file
+      register: result
+      loop: "{{ molecule_yml.platforms }}"
+
+    - name: Add container to molecule_inventory
+      vars:
+        inventory_partial_yaml: |
+          all:
+            children:
+              molecule:
+                hosts:
+                  "{{ item.name }}":
+                    ansible_connection: containers.podman.podman
+      ansible.builtin.set_fact:
+        molecule_inventory: >
+          {{ inventory_partial_yaml | from_yaml }}
+      loop: "{{ molecule_yml.platforms }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Dump molecule_inventory
+      ansible.builtin.copy:
+        content: |
+          {{ molecule_inventory | to_yaml }}
+        dest: "{{ molecule_ephemeral_directory }}/inventory/molecule_inventory.yml"
+        mode: "0600"
+
+    - name: Force inventory refresh
+      ansible.builtin.meta: refresh_inventory

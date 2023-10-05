@@ -6,6 +6,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+
 __metaclass__ = type
 
 DOCUMENTATION = r"""
@@ -14,7 +15,7 @@ module: beat
 
 short_description: Beat time module
 
-version_added: "1.1.0"
+version_added: "1.0.0"
 
 description: Beat time module is a module that returns the current time using internet time (beats).
 

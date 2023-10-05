@@ -37,6 +37,11 @@ jobs:
       - name: Install molecule (${{ matrix.molecule }})
         run: pip install https://github.com/ansible/molecule/archive/${{ matrix.molecule }}.tar.gz --disable-pip-version-check
 
+      - name: Install requirements
+        run: >
+          ansible-galaxy install -r requirements.yml
+        working-directory: ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}/roles/beat_role/molecule
+
       - name: Run molecule tests
         run: >
           molecule test --all

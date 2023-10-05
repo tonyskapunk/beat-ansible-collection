@@ -15,21 +15,29 @@ env:
 
 jobs:
   molecule:
-    name: Molecule
+    name: Molecule ${{ matrix.molecule }}
+    strategy:
+      matrix:
+        molecule:
+          - v6.0.2
+          - v5.1.0
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          path: "${{ github.repository }}"
+          path: ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}
 
-      - name: Molecule
-        uses: gofrolist/molecule-action@v2
+      - name: Set up Python
+        uses: actions/setup-python@v3
         with:
-          molecule_options: --debug
-          molecule_command: test
-          molecule_args: --all --driver-name podman
-          molecule_working_dir: "${{ github.repository }}/roles/beat_role"
-        env:
-          ANSIBLE_FORCE_COLOR: '1'
+          python-version: '3.11'
+
+      - name: Install molecule (${{ matrix.molecule }})
+        run: pip install https://github.com/ansible/molecule/archive/${{ matrix.molecule }}.tar.gz --disable-pip-version-check
+
+      - name: Run molecule tests
+        run: >
+          molecule test --all
+        working-directory: ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}/roles/beat_role

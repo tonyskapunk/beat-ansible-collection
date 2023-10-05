@@ -1,4 +1,4 @@
-[![Ansible Collection](https://img.shields.io/badge/dynamic/json?color=orange&style=flat&label=collection&prefix=v&url=https://galaxy.ansible.com/api/v3/collections/tonyskapunk/beat/&query=highest_version.version)](https://galaxy.ansible.com/tonyskapunk/beat)
+[![Ansible Collection](https://img.shields.io/badge/dynamic/json?color=orange&style=flat&label=collection&prefix=v&url=https://galaxy.ansible.com/api/v3/collections/tonyskapunk/beat/&query=highest_version.version)](https://galaxy.ansible.com/ui/repo/published/tonyskapunk/beat/)
 [![GitHub tag](https://img.shields.io/github/tag/tonyskapunk/beat-ansible-collection.svg)](https://github.com/tonyskapunk/beat-ansible-collection/tags)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/tonyskapunk/beat-ansible-collection)](https://github.com/tonyskapunk/beat-ansible-collection/tags)
 [![GitHub Contributors](https://img.shields.io/github/contributors/tonyskapunk/beat-ansible-collection)](https://github.com/tonyskapunk/beat-ansible-collection/tags)

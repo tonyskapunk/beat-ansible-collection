@@ -30,6 +30,6 @@ jobs:
           molecule_options: --debug
           molecule_command: test
           molecule_args: --all --driver-name podman
-          molecule_working_dir: roles/beat_role
+          molecule_working_dir: "${{ github.repository }}"/roles/beat_role
         env:
           ANSIBLE_FORCE_COLOR: '1'

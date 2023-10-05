@@ -39,8 +39,8 @@ jobs:
 
       - name: Install requirements
         run: >
-          ansible-galaxy install -r requirements.yml
-        working-directory: ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}/roles/beat_role/molecule
+          ansible-galaxy install -r 
+          ./ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}/roles/beat_role/molecule/*/requirements.yml
 
       - name: Run molecule tests
         run: >

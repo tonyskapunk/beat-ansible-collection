@@ -1,6 +1,9 @@
 ---
 namespace: tonyskapunk
 name: beat
+# Always leave patch version as .0
+# Patch version is replaced from commit date and git hash
+# example: 1.2.202311141650+git0a1b2c3
 version: 1.2.0
 readme: README.md
 authors:

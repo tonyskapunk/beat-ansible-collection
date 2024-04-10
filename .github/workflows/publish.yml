@@ -35,7 +35,6 @@ jobs:
           SLACK_COLOR: ${{ job.status }}
           SLACK_FOOTER: "version: ${{ steps.galaxy.outputs.ver }}"
           SLACKIFY_MARKDOWN: true
-          SLACK_MESSAGE: ''
           SLACK_TITLE: 🔴 Galaxy Publication Failure
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 

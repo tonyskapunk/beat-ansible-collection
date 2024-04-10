@@ -31,8 +31,14 @@ jobs:
         if: ${{ failure() }}
         uses: rtCamp/action-slack-notify@v2
         env:
-          MSG_MINIMAL: true
+          ENABLE_ESCAPES: true
           SLACK_COLOR: ${{ job.status }}
+          SLACK_FOOTER: "version: ${{ steps.galaxy.outputs.ver }}"
+          SLACKIFY_MARKDOWN: true
+          SLACK_MESSAGE: >
+            ![${{ github.actor }}](${{ github.server_url }}/${{ github.actor }}.png?size=32)
+            [${{ github.actor }}](${{ github.server_url }}/${{ github.actor }})\n
+            [Actions URL](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}/checks)
           SLACK_TITLE: Galaxy Publication Failure
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_FOOTER: ${{ steps.galaxy.outputs.ver }}
+

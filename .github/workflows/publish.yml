@@ -31,10 +31,8 @@ jobs:
         if: ${{ failure() }}
         uses: rtCamp/action-slack-notify@v2
         env:
-          ENABLE_ESCAPES: true
           SLACK_COLOR: ${{ job.status }}
           SLACK_FOOTER: "version: ${{ steps.galaxy.outputs.ver }}"
-          SLACKIFY_MARKDOWN: true
           SLACK_TITLE: 🔴 Galaxy Publication Failure
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 

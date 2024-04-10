@@ -13,13 +13,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Add release, date and commit hash to version in galaxy.yml
-        id: galaxy_version
+        id: galaxy
         run: >
           z=$(TZ=UTC0 git show ${{ github.sha }} --no-patch --format=%cd --date=format-local:'%s')
           ts=$(TZ=UTC0 git show ${{ github.sha }} --no-patch --format=%cd --date=format-local:'%Y%m%d%H%M')
           sha=$(echo "${{ github.sha }}" | cut -c1-7);
           sed -i -r "s/^(version: .*)\.0$/\1.${z}+${ts}.git${sha}/" galaxy.yml;
-          grep ^version galaxy.yml | tee "${GITHUB_OUTPUT}"
+          grep ^version galaxy.yml;
+          awk '/^version/ {printf("ver=%s", $2)}' galaxy.yml >> "${GITHUB_OUTPUT}"
 
       - name: Ansible Publish to Galaxy
         uses: ansible/ansible-publish-action@v1.0.0
@@ -33,4 +34,4 @@ jobs:
           SLACK_COLOR: ${{ job.status }}
           SLACK_TITLE: Galaxy Publication Failure
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_FOOTER: ${{ steps.galaxy_version }}
+          SLACK_FOOTER: ${{ steps.galaxy.outputs.ver }}

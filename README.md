@@ -64,3 +64,4 @@ or you can add full namespace and collection name in the `collections` element i
 ## License
 
 GPL-3.0-or-later
+

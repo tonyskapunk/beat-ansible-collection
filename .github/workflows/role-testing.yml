@@ -18,9 +18,12 @@ jobs:
     name: Molecule ${{ matrix.molecule }}
     strategy:
       matrix:
-        molecule:
-          - v6.0.3
-          - v24.6.0
+        verisons:
+          - python: "3.11"
+            molecule: v6.0.3
+          - python: "3.12"
+            moleculde: v24.6.0
+
     runs-on: ubuntu-24.04
     steps:
 
@@ -29,12 +32,10 @@ jobs:
         with:
           path: ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python }}
         uses: actions/setup-python@v5
         with:
-          python-version:
-            - '3.12'
-            - '3.11'
+          python-version: ${{ matrix.python }}
 
       - name: Install molecule (${{ matrix.molecule }})
         run: pip install https://github.com/ansible/molecule/archive/${{ matrix.molecule }}.tar.gz --disable-pip-version-check

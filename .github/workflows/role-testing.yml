@@ -15,10 +15,10 @@ env:
 
 jobs:
   molecule:
-    name: Molecule ${{ matrix.molecule }}
+    name: Molecule ${{ matrix.ver.molecule }}
     strategy:
       matrix:
-        verisons:
+        ver:
           - python: "3.11"
             molecule: v6.0.3
           - python: "3.12"
@@ -32,13 +32,13 @@ jobs:
         with:
           path: ansible_collections/${{ env.NAMESPACE }}/${{ env.COLLECTION_NAME }}
 
-      - name: Set up Python ${{ matrix.python }}
+      - name: Set up Python ${{ matrix.ver.python }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          python-version: ${{ matrix.ver.python }}
 
-      - name: Install molecule (${{ matrix.molecule }})
-        run: pip install https://github.com/ansible/molecule/archive/${{ matrix.molecule }}.tar.gz --disable-pip-version-check
+      - name: Install molecule (${{ matrix.ver.molecule }})
+        run: pip install https://github.com/ansible/molecule/archive/${{ matrix.ver.molecule }}.tar.gz --disable-pip-version-check
 
       - name: Install requirements
         run: >

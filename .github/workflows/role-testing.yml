@@ -22,7 +22,7 @@ jobs:
           - python: "3.11"
             molecule: v6.0.3
           - python: "3.12"
-            moleculde: v24.6.0
+            molecule: v24.6.0
 
     runs-on: ubuntu-24.04
     steps:

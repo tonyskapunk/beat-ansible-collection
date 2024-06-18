@@ -3,8 +3,7 @@ namespace: tonyskapunk
 name: beat
 # Always leave patch version as .0
 # Patch version is replaced from commit date in epoch format
-# Metadata is added including comit date and git hash
-# example: 1.2.2147483647+203801190314.git0a1b2c3
+# example: 1.2.${epoch}
 version: 1.2.0
 readme: README.md
 authors:

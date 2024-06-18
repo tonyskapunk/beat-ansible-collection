@@ -15,7 +15,7 @@ jobs:
       - name: Add release, date and commit hash to version in galaxy.yml
         id: galaxy
         run: >
-          ts=$(TZ=UTC0 git show ${{ github.sha }} --no-patch --format=%cd --date=format-local:'%Y%m%d%H%M')
+          ts=$(TZ=UTC0 git show ${{ github.sha }} --no-patch --format=%cd --date=format-local:'%s')
           sha=$(echo "${{ github.sha }}" | cut -c1-7);
           sed -i -r "s/^(version: .*)\.0$/\1.${ts}/" galaxy.yml;
           grep ^version galaxy.yml;

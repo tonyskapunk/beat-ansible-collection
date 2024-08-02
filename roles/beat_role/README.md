@@ -1,23 +1,32 @@
-# Ansible role: beat_role
+# beat_role
 
 A role to print the Internet Time in beats.
 
-## Role Variables
+## Input Variables
 
-None
+| Var    | Type |  Value  | Required | Description |
+| ------ | ---- | ------- | -------- | ----------- |
+| beat_role_centibeats | bool | true | No | Whether to return the beat time using centibeats |
 
-# Example Playbook
+## Examples
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+- At the play level, with default values
 
 ```yaml
-    - hosts: servers
-      roles:
-         - { role: tonyskapunk.beat, x: 42 }
-
-- hosts: all
+- name: Beats
+  hosts: localhost
   roles:
-    - role: tonyskapunk.beat.beat_role
+     - role: tonyskapunk.beat.beat_role
+```
+
+- As a task, without centibeats
+
+```yaml
+- name: Print beat time
+  ansible.builtin.include_role:
+    name: tonyskapunk.beat.beat_role
+  vars:
+    beat_role_centibeats: false
 ```
 
 ## License

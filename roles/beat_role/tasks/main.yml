@@ -1,9 +1,9 @@
 ---
 - name: Get beat time
   tonyskapunk.beat.beat:
-    centibeats: true
+    centibeats: {{ beat_role_centibeats | bool }}
   register: beat_time
 
 - name: Print beat time
-  debug:
+  ansible.builtin.debug:
     msg: "The beat time is {{ beat_time.beats }}"

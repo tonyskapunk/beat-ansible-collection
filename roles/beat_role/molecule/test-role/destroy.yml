@@ -10,7 +10,6 @@
         state: absent
         rm: true
 
-
 - name: Remove dynamic molecule inventory
   hosts: localhost
   gather_facts: false

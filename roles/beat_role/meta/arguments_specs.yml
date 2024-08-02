@@ -1,0 +1,13 @@
+---
+argument_specs:
+  main:
+    short_description: Entrypoint for the role
+    description:
+      - Gets the beat time and prints it
+    options:
+      beat_role_centibeats:
+        type: "bool"
+        required: false
+        default: true
+        description:
+          - "Whether to return the beat time using centibeats"

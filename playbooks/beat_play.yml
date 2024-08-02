@@ -3,23 +3,29 @@
   hosts: localhost
   tasks:
 
-  - name: Test beat module
-    tonyskapunk.beat.beat:
-    register: test_beat
+    - name: Test beat module
+      tonyskapunk.beat.beat:
+      register: test_beat
 
-  - name: Print beat
-    debug:
-      msg: '{{ test_beat }}'
-  
-  - name: Test beat module with centibeats
-    tonyskapunk.beat.beat:
-      centibeats: true
-    register: test_beat
+    - name: Print beat
+      ansible.builtin.debug:
+        msg: '{{ test_beat }}'
 
-  - name: Print beat with centibeats
-    debug:
-      msg: '{{ test_beat }}'
+    - name: Test beat module with centibeats
+      tonyskapunk.beat.beat:
+        centibeats: true
+      register: test_beat
 
-  - name: Include beat role
-    ansible.builtin.include_role:
-      name: tonyskapunk.beat.beat_role
+    - name: Print beat with centibeats
+      ansible.builtin.debug:
+        msg: '{{ test_beat }}'
+
+    - name: Include beat role with centibeats (default)
+      ansible.builtin.include_role:
+        name: tonyskapunk.beat.beat_role
+
+    - name: Include beat role without centibeats
+      ansible.builtin.include_role:
+        name: tonyskapunk.beat.beat_role
+      vars:
+        beat_centibeats: false

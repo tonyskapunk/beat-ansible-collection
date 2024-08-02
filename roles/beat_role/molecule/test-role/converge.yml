@@ -3,6 +3,12 @@
   hosts: molecule
   gather_facts: false
   tasks:
-    - name: Include beat_role
+    - name: Include beat_role with centibeats (default)
       ansible.builtin.include_role:
         name: beat_role
+
+    - name: Include beat_role (without centibeats)
+      ansible.builtin.include_role:
+        name: beat_role
+      vars:
+        beat_centibeats: false

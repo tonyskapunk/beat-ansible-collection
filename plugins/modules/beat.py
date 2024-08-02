@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2023 Tony Garcia
+# Copyright (c) 2023-2024 Tony Garcia
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -70,7 +70,11 @@ def internettime(hours, minutes, seconds, tzone, centibeats=False):
 
 def now(use_centibeats=False):
     """Gets the current time in beats."""
-    utc_now = datetime.utcnow()
+    try:
+        # Pyton 3.11+
+        utc_now = datetime.now(datetime.UTC)
+    except AttributeError:
+        utc_now = datetime.utcnow()
     beats = internettime(
         utc_now.hour, utc_now.minute, utc_now.second, 0, use_centibeats
     )

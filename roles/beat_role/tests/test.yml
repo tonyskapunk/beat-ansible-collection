@@ -1,4 +1,5 @@
 ---
-- hosts: localhost
+- name: Test beat_role
+  hosts: localhost
   roles:
-    - beat
+    - tonyskapunk.beat.beat_role

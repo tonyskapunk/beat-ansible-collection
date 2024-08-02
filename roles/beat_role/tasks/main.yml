@@ -1,7 +1,7 @@
 ---
 - name: Get beat time
   tonyskapunk.beat.beat:
-    centibeats: {{ beat_role_centibeats | bool }}
+    centibeats: "{{ beat_role_centibeats | bool }}"
   register: beat_time
 
 - name: Print beat time

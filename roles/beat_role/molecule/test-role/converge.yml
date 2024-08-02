@@ -11,4 +11,4 @@
       ansible.builtin.include_role:
         name: beat_role
       vars:
-        beat_centibeats: false
+        beat_role_centibeats: false

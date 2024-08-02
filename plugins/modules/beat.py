@@ -70,7 +70,11 @@ def internettime(hours, minutes, seconds, tzone, centibeats=False):
 
 def now(use_centibeats=False):
     """Gets the current time in beats."""
-    utc_now = datetime.now(datetime.UTC)
+    try:
+        # Pyton 3.11+
+        utc_now = datetime.now(datetime.UTC)
+    except AttributeError:
+        utc_now = datetime.utcnow()
     beats = internettime(
         utc_now.hour, utc_now.minute, utc_now.second, 0, use_centibeats
     )
